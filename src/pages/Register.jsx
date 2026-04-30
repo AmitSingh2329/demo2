@@ -23,7 +23,7 @@ const Register = () => {
 
     try {
       const res = await axios.post(
-        "demo1-eight-xi.vercel.app/api/auth/register",
+        "https://demo1-adh4.onrender.com/api/auth/register",
         form
       );
 

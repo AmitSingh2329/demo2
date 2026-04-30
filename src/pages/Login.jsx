@@ -22,7 +22,7 @@ const Login = ({ setUser }) => {
 
     try {
       const res = await axios.post(
-        "demo1-eight-xi.vercel.app/api/auth/login",
+        "https://demo1-adh4.onrender.com/api/auth/login",
         form,
         { withCredentials: true }
       );
