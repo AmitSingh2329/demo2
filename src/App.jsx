@@ -162,7 +162,6 @@
 // }
 
 // export default App;
-
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useState, useEffect, lazy, Suspense } from "react";
 import axios from "axios";
@@ -210,6 +209,11 @@ const PageWrapper = ({ children, noScroll = false }) => {
       <div className="relative z-20 h-full">{children}</div>
     </motion.div>
   );
+};
+
+/* 🔥 Loader using SAME animation (no text) */
+const PageLoader = () => {
+  return <PageWrapper />;
 };
 
 /* 🔥 Animated Routes */
@@ -329,8 +333,8 @@ function App() {
     <BrowserRouter>
       <Navbar user={user} setUser={setUser} />
 
-      {/* 🔥 Suspense wrapper for lazy pages */}
-      <Suspense fallback={null}>
+      {/* 🔥 Smooth fallback (no text, same animation) */}
+      <Suspense fallback={<PageLoader />}>
         <AnimatedRoutes user={user} setUser={setUser} />
       </Suspense>
     </BrowserRouter>
