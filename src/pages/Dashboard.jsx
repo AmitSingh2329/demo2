@@ -14,12 +14,18 @@ const Dashboard = ({ user, setUser }) => {
   };
 
   useEffect(() => {
-    if (user) {
-      setData(user);
-    } else {
-      navigate("/login");
-    }
-  }, [user, navigate]);
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/auth/profile`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setData(res.data);
+        setUser(res.data); // keep global state updated
+      })
+      .catch(() => {
+        navigate("/login");
+      });
+  }, [navigate, setUser]);
 
   const handleLogout = async () => {
     await axios.post(
