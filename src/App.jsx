@@ -211,7 +211,7 @@ const PageWrapper = ({ children, noScroll = false }) => {
   );
 };
 
-/* 🔥 Loader using SAME animation (no text) */
+/* 🔥 Loader using SAME animation */
 const PageLoader = () => {
   return <PageWrapper />;
 };
@@ -223,7 +223,6 @@ function AnimatedRoutes({ user, setUser }) {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        {/* Home */}
         <Route
           path="/"
           element={
@@ -233,7 +232,6 @@ function AnimatedRoutes({ user, setUser }) {
           }
         />
 
-        {/* Crop */}
         <Route
           path="/crop"
           element={
@@ -245,7 +243,6 @@ function AnimatedRoutes({ user, setUser }) {
           }
         />
 
-        {/* Dashboard */}
         <Route
           path="/dashboard"
           element={
@@ -257,7 +254,6 @@ function AnimatedRoutes({ user, setUser }) {
           }
         />
 
-        {/* Disease */}
         <Route
           path="/disease"
           element={
@@ -269,7 +265,6 @@ function AnimatedRoutes({ user, setUser }) {
           }
         />
 
-        {/* Login */}
         <Route
           path="/login"
           element={
@@ -279,7 +274,6 @@ function AnimatedRoutes({ user, setUser }) {
           }
         />
 
-        {/* Register */}
         <Route
           path="/register"
           element={
@@ -289,7 +283,6 @@ function AnimatedRoutes({ user, setUser }) {
           }
         />
 
-        {/* Alerts */}
         <Route
           path="/alerts"
           element={
@@ -310,6 +303,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // 🔥 Check auth on load
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/auth/profile`, {
@@ -325,6 +319,13 @@ function App() {
       });
   }, []);
 
+  // 🔥 Preload Dashboard AFTER user is available
+  useEffect(() => {
+    if (user) {
+      import("./pages/Dashboard");
+    }
+  }, [user]);
+
   if (loading) {
     return <div className="p-6"></div>;
   }
@@ -333,7 +334,7 @@ function App() {
     <BrowserRouter>
       <Navbar user={user} setUser={setUser} />
 
-      {/* 🔥 Smooth fallback (no text, same animation) */}
+      {/* 🔥 Smooth fallback (no flash) */}
       <Suspense fallback={<PageLoader />}>
         <AnimatedRoutes user={user} setUser={setUser} />
       </Suspense>
