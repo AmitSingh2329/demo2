@@ -9,25 +9,29 @@ const slides = [
   {
     title: "Crop Recommendation",
     subtitle: "Find best crop for your soil",
-    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80",
+    image:
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80",
     path: "/crop",
   },
   {
     title: "Disease Detection",
     subtitle: "Detect plant diseases instantly",
-    image: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1600&q=80",
+    image:
+      "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1600&q=80",
     path: "/disease",
   },
   {
     title: "Weather Alerts",
     subtitle: "Real-time weather updates",
-    image: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1600&q=80",
+    image:
+      "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1600&q=80",
     path: "/alerts",
   },
   {
     title: "Crop Yield Prediction",
     subtitle: "Predict your farm output",
-    image: "https://images.unsplash.com/photo-1471193945509-9ad0617afabf?auto=format&fit=crop&w=1600&q=80",
+    image:
+      "https://images.unsplash.com/photo-1471193945509-9ad0617afabf?auto=format&fit=crop&w=1600&q=80",
     path: "/yield",
   },
 ];
@@ -71,6 +75,9 @@ const Home = () => {
       try {
         const res = await axios.get(
           `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=precipitation`,
+          {
+            withCredentials: false, // 🔥 ADD THIS
+          },
         );
 
         const currentHour = new Date().getHours();
@@ -236,4 +243,3 @@ const Home = () => {
 };
 
 export default Home;
-
