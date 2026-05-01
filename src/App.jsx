@@ -321,9 +321,21 @@ function App() {
 
   // 🔥 Preload Dashboard AFTER user is available
   useEffect(() => {
-    if (user) {
-      import("./pages/Dashboard");
-    }
+    if (!user) return;
+
+    // 🔥 High priority (most used)
+    import("./pages/Dashboard");
+
+    // 🔥 Medium priority (delay slightly)
+    setTimeout(() => {
+      import("./pages/CropRecommendation");
+      import("./pages/DiseaseDetection");
+    }, 1000);
+
+    // 🔥 Low priority (background)
+    setTimeout(() => {
+      import("./pages/weatherAlert");
+    }, 2000);
   }, [user]);
 
   if (loading) {
