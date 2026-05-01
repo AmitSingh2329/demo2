@@ -330,7 +330,7 @@ function App() {
       <Navbar user={user} setUser={setUser} />
 
       {/* 🔥 Suspense wrapper for lazy pages */}
-      <Suspense fallback={<div className="p-6">Loading...</div>}>
+      <Suspense fallback={null}>
         <AnimatedRoutes user={user} setUser={setUser} />
       </Suspense>
     </BrowserRouter>
