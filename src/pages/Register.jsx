@@ -23,7 +23,7 @@ const Register = () => {
 
     try {
       const res = await axios.post(
-        `${import.meta.env.BACKEND_URL}/api/auth/register`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/register`,
         form
       );
 

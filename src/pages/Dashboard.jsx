@@ -10,12 +10,12 @@ const Dashboard = ({ user, setUser }) => {
   const getImageUrl = (img) => {
     if (!img) return "";
     if (img.startsWith("http")) return img;
-    return `${import.meta.env.BACKEND_URL}/uploads/${img}`;
+    return `${import.meta.env.VITE_BACKEND_URL}/uploads/${img}`;
   };
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.BACKEND_URL}/api/auth/profile`, {
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/auth/profile`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -29,7 +29,7 @@ const Dashboard = ({ user, setUser }) => {
 
   const handleLogout = async () => {
     await axios.post(
-      `${import.meta.env.BACKEND_URL}/api/auth/logout`,
+      `${import.meta.env.VITE_BACKEND_URL}/api/auth/logout`,
       {},
       { withCredentials: true }
     );
@@ -53,7 +53,7 @@ const Dashboard = ({ user, setUser }) => {
   const handleDeleteDisease = async (id) => {
     if (!window.confirm("Delete this disease record?")) return;
 
-    await axios.delete(`${import.meta.env.BACKEND_URL}/api/user/disease/${id}`, {
+    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/user/disease/${id}`, {
       withCredentials: true,
     });
 

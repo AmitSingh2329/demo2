@@ -17,7 +17,7 @@ export default function Navbar({ user, setUser }) {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:5000/api/auth/logout",
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/logout`,
         {},
         { withCredentials: true }
       );

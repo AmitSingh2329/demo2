@@ -46,7 +46,7 @@ const WeatherAlerts = () => {
         getLocationName(lat, lon);
       } catch {}
 
-      const res = await axios.get(`${import.meta.env.BACKEND_URL}/api/alerts`, {
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/alerts`, {
         params: { lat, lon },
         withCredentials: true,
       });
