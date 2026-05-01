@@ -65,12 +65,7 @@ const Dashboard = ({ user, setUser }) => {
     }));
   };
 
-  if (!data)
-    return (
-      <div className="h-screen flex items-center justify-center text-white text-xl">
-        Loading...
-      </div>
-    );
+  if (!data) return null;
 
   const cropHistory = [...(data.cropHistory || [])].reverse();
   const diseaseHistory = [...(data.diseaseHistory || [])].reverse();
