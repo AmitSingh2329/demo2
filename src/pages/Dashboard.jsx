@@ -31,7 +31,7 @@ const Dashboard = ({ user, setUser }) => {
     await axios.post(
       `${import.meta.env.VITE_BACKEND_URL}/api/auth/logout`,
       {},
-      { withCredentials: true }
+      { withCredentials: true },
     );
     setUser(null);
     navigate("/login");
@@ -40,9 +40,12 @@ const Dashboard = ({ user, setUser }) => {
   const handleDeleteCrop = async (id) => {
     if (!window.confirm("Delete this crop history?")) return;
 
-    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/user/crop/${id}`, {
-      withCredentials: true,
-    });
+    await axios.delete(
+      `${import.meta.env.VITE_BACKEND_URL}/api/user/crop/${id}`,
+      {
+        withCredentials: true,
+      },
+    );
 
     setData((prev) => ({
       ...prev,
@@ -53,14 +56,17 @@ const Dashboard = ({ user, setUser }) => {
   const handleDeleteDisease = async (id) => {
     if (!window.confirm("Delete this disease record?")) return;
 
-    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/user/disease/${id}`, {
-      withCredentials: true,
-    });
+    await axios.delete(
+      `${import.meta.env.VITE_BACKEND_URL}/api/user/disease/${id}`,
+      {
+        withCredentials: true,
+      },
+    );
 
     setData((prev) => ({
       ...prev,
       diseaseHistory: prev.diseaseHistory.filter(
-        (i) => i._id.toString() !== id
+        (i) => i._id.toString() !== id,
       ),
     }));
   };
@@ -83,7 +89,6 @@ const Dashboard = ({ user, setUser }) => {
 
   return (
     <div className="min-h-screen relative bg-gradient-to-br from-green-900 via-black to-green-800 p-6">
-
       {/* HEADER */}
       <div className="max-w-7xl mx-auto mb-10 flex justify-between items-center">
         <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-wide">
@@ -103,15 +108,11 @@ const Dashboard = ({ user, setUser }) => {
 
       {/* 🌱 CROP HISTORY */}
       <section className="max-w-7xl mx-auto">
-        <h2 className="text-2xl font-bold text-green-300 mb-5">
-           Crop History
-        </h2>
+        <h2 className="text-2xl font-bold text-green-300 mb-5">Crop History</h2>
 
         {cropHistory.length === 0 ? (
           <div className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl text-center border border-white/20">
-            <p className="text-gray-300 text-lg">
-              No crop predictions yet
-            </p>
+            <p className="text-gray-300 text-lg">No crop predictions yet</p>
             <button
               onClick={() => navigate("/crop")}
               className="mt-4 bg-green-500 hover:bg-green-600 px-6 py-2 rounded-lg text-white font-semibold transition"
@@ -122,7 +123,9 @@ const Dashboard = ({ user, setUser }) => {
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cropHistory.map((item) => {
-              const confidence = item.result.probability * 100;
+              const confidence = item.result?.probability
+                ? item.result.probability * 100
+                : 0;
 
               return (
                 <div
@@ -154,8 +157,11 @@ const Dashboard = ({ user, setUser }) => {
                     <h3 className="text-sm font-semibold text-gray-300 mb-1">
                       📊 Top Recommendations
                     </h3>
-                    {item.result.top_3_recommendations.map((crop, i) => (
-                      <div key={i} className="flex justify-between text-sm text-gray-200">
+                    {item.result?.top_3_recommendations?.map((crop, i) => (
+                      <div
+                        key={i}
+                        className="flex justify-between text-sm text-gray-200"
+                      >
                         <span>{crop.crop}</span>
                         <span>{(crop.probability * 100).toFixed(1)}%</span>
                       </div>
@@ -186,14 +192,12 @@ const Dashboard = ({ user, setUser }) => {
       {/* 🦠 DISEASE HISTORY */}
       <section className="max-w-7xl mx-auto mt-12">
         <h2 className="text-2xl font-bold text-green-300 mb-5">
-           Disease History
+          Disease History
         </h2>
 
         {diseaseHistory.length === 0 ? (
           <div className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl text-center border border-white/20">
-            <p className="text-gray-300 text-lg">
-              No disease detection yet
-            </p>
+            <p className="text-gray-300 text-lg">No disease detection yet</p>
             <button
               onClick={() => navigate("/disease")}
               className="mt-4 bg-green-500 hover:bg-green-600 px-6 py-2 rounded-lg text-white font-semibold"
