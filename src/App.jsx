@@ -326,7 +326,7 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div className="p-6">Loading...</div>;
+    return <div className="p-6"></div>;
   }
 
   return (
