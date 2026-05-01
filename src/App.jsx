@@ -211,11 +211,6 @@ const PageWrapper = ({ children, noScroll = false }) => {
   );
 };
 
-/* 🔥 Loader using SAME animation */
-const PageLoader = () => {
-  return <PageWrapper />;
-};
-
 /* 🔥 Animated Routes */
 function AnimatedRoutes({ user, setUser }) {
   const location = useLocation();
@@ -303,7 +298,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔥 Check auth on load
+  // 🔥 Auth check
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/auth/profile`, {
@@ -319,20 +314,17 @@ function App() {
       });
   }, []);
 
-  // 🔥 Preload Dashboard AFTER user is available
+  // 🔥 Smart Preloading
   useEffect(() => {
     if (!user) return;
 
-    // 🔥 High priority (most used)
     import("./pages/Dashboard");
 
-    // 🔥 Medium priority (delay slightly)
     setTimeout(() => {
       import("./pages/CropRecommendation");
       import("./pages/DiseaseDetection");
     }, 1000);
 
-    // 🔥 Low priority (background)
     setTimeout(() => {
       import("./pages/weatherAlert");
     }, 2000);
@@ -346,8 +338,8 @@ function App() {
     <BrowserRouter>
       <Navbar user={user} setUser={setUser} />
 
-      {/* 🔥 Smooth fallback (no flash) */}
-      <Suspense fallback={<PageLoader />}>
+      {/* ✅ FIX: no fallback animation */}
+      <Suspense fallback={null}>
         <AnimatedRoutes user={user} setUser={setUser} />
       </Suspense>
     </BrowserRouter>
