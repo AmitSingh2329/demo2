@@ -23,7 +23,7 @@ const Register = () => {
 
     try {
       const res = await axios.post(
-        "https://demo1-adh4.onrender.com/api/auth/register",
+        `${import.meta.env.BACKEND_URL}/api/auth/register`,
         form
       );
 

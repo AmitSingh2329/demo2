@@ -10,12 +10,12 @@ const Dashboard = ({ user, setUser }) => {
   const getImageUrl = (img) => {
     if (!img) return "";
     if (img.startsWith("http")) return img;
-    return `http://localhost:5000/uploads/${img}`;
+    return `${import.meta.env.BACKEND_URL}/uploads/${img}`;
   };
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/auth/profile", {
+      .get(`${import.meta.env.BACKEND_URL}/api/auth/profile`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -29,7 +29,7 @@ const Dashboard = ({ user, setUser }) => {
 
   const handleLogout = async () => {
     await axios.post(
-      "http://localhost:5000/api/auth/logout",
+      `${import.meta.env.BACKEND_URL}/api/auth/logout`,
       {},
       { withCredentials: true }
     );
@@ -40,7 +40,7 @@ const Dashboard = ({ user, setUser }) => {
   const handleDeleteCrop = async (id) => {
     if (!window.confirm("Delete this crop history?")) return;
 
-    await axios.delete(`http://localhost:5000/api/user/crop/${id}`, {
+    await axios.delete(`process.env.BACKEND_URL/api/user/crop/${id}`, {
       withCredentials: true,
     });
 
@@ -53,7 +53,7 @@ const Dashboard = ({ user, setUser }) => {
   const handleDeleteDisease = async (id) => {
     if (!window.confirm("Delete this disease record?")) return;
 
-    await axios.delete(`http://localhost:5000/api/user/disease/${id}`, {
+    await axios.delete(`${import.meta.env.BACKEND_URL}/api/user/disease/${id}`, {
       withCredentials: true,
     });
 

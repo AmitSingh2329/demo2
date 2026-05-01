@@ -22,7 +22,7 @@ const Login = ({ setUser }) => {
 
     try {
       const res = await axios.post(
-        "https://demo1-adh4.onrender.com/api/auth/login",
+        `${import.meta.env.BACKEND_URL}/api/auth/login`,
         form,
         { withCredentials: true }
       );

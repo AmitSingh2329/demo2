@@ -36,7 +36,7 @@ const DiseaseDetection = () => {
       formData.append("image", image);
 
       const res = await axios.post(
-        "http://localhost:5000/api/disease/detect",
+        `${import.meta.env.BACKEND_URL}/api/disease/detect`,
         formData,
         { withCredentials: true }
       );

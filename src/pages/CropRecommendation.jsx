@@ -59,7 +59,7 @@ const CropRecommendation = () => {
       };
 
       const res = await axios.post(
-        "http://localhost:5000/api/crop/predict",
+        `${import.meta.env.BACKEND_URL}/api/crop/predict`,
         payload,
         { withCredentials: true }
       );
