@@ -52,7 +52,6 @@ function AnimatedRoutes({ user, setUser }) {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        
         {/* Scrollable Pages */}
         <Route
           path="/"
@@ -73,7 +72,6 @@ function AnimatedRoutes({ user, setUser }) {
             </ProtectedRoute>
           }
         />
-
 
         <Route
           path="/dashboard"
@@ -117,7 +115,7 @@ function AnimatedRoutes({ user, setUser }) {
           }
         />
 
-         <Route
+        <Route
           path="/alerts"
           element={
             <ProtectedRoute user={user}>
@@ -127,7 +125,6 @@ function AnimatedRoutes({ user, setUser }) {
             </ProtectedRoute>
           }
         />
-
       </Routes>
     </AnimatePresence>
   );
@@ -139,7 +136,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/auth/profile", {
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/auth/profile`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -165,4 +162,3 @@ function App() {
 }
 
 export default App;
-
