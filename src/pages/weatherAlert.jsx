@@ -20,10 +20,18 @@ const WeatherAlerts = () => {
     });
 
   const getLocationName = async (lat, lon) => {
-    try {
-      const res = await axios.get(
-        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
-      );
+     try {
+    const res = await axios.get(
+      `https://nominatim.openstreetmap.org/reverse`,
+      {
+        withCredentials: false, // 🔥 ADD THIS
+        params: {
+          format: "json",
+          lat,
+          lon
+        }
+      }
+    );
 
       setLocationName(
         res.data.address.city ||
