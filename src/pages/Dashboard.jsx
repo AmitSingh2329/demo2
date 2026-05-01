@@ -40,7 +40,7 @@ const Dashboard = ({ user, setUser }) => {
   const handleDeleteCrop = async (id) => {
     if (!window.confirm("Delete this crop history?")) return;
 
-    await axios.delete(`process.env.VITE_BACKEND_URL/api/user/crop/${id}`, {
+    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/user/crop/${id}`, {
       withCredentials: true,
     });
 
