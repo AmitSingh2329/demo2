@@ -2,13 +2,13 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
-
+import Navbar from "./component/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import CropRecommendation from "./pages/CropRecommendation";
-import Navbar from "./component/Navbar";
+
 import ProtectedRoute from "./component/ProtectedRoute";
 import WeatherAlertsPage from "./pages/WeatherAlert";
 import DiseaseDetection from "./pages/DiseaseDetection";
@@ -147,7 +147,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/auth/profile", {
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/auth/profile`, {
         withCredentials: true,
       })
       .then((res) => {
