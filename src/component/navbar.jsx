@@ -19,7 +19,7 @@ export default function Navbar({ user, setUser }) {
       await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/auth/logout`,
         {},
-        { withCredentials: true }
+        { withCredentials: true },
       );
       setUser(null);
       setProfileOpen(false);
@@ -51,7 +51,6 @@ export default function Navbar({ user, setUser }) {
 
       <div className="max-w-7xl mx-auto px-4 h-full">
         <div className="flex justify-between items-center h-full">
-
           {/* 🔥 Logo */}
           <Link to="/" className="text-xl font-bold flex items-center gap-1">
             <span className="text-green-400">Agro</span>
@@ -60,10 +59,15 @@ export default function Navbar({ user, setUser }) {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6">
-
             {/* Home */}
             <Link className="relative group" to="/">
-              <span className={isActive("/") ? "text-green-300" : "group-hover:text-green-300"}>
+              <span
+                className={
+                  isActive("/")
+                    ? "text-green-300"
+                    : "group-hover:text-green-300"
+                }
+              >
                 Home
               </span>
               {isActive("/") && (
@@ -73,7 +77,13 @@ export default function Navbar({ user, setUser }) {
 
             {/* Dashboard */}
             <Link className="relative group" to="/dashboard">
-              <span className={isActive("/dashboard") ? "text-green-300" : "group-hover:text-green-300"}>
+              <span
+                className={
+                  isActive("/dashboard")
+                    ? "text-green-300"
+                    : "group-hover:text-green-300"
+                }
+              >
                 Dashboard
               </span>
               {isActive("/dashboard") && (
@@ -102,6 +112,8 @@ export default function Navbar({ user, setUser }) {
                     {[
                       { to: "/crop", label: "🌾 Crop Recommendation" },
                       { to: "/disease", label: "🦠 Disease Detection" },
+                      { to: "/yield", label: "📈 Yield Prediction" },
+
                       { to: "/alerts", label: "🌦 Weather Alert" },
                     ].map((item, i) => (
                       <Link
@@ -196,19 +208,46 @@ export default function Navbar({ user, setUser }) {
             exit={{ opacity: 0, y: -20 }}
             className="md:hidden bg-black/80 backdrop-blur-xl border-t border-white/10 px-4 pb-4"
           >
-            <Link onClick={() => setIsOpen(false)} to="/" className="block py-2">
+            <Link
+              onClick={() => setIsOpen(false)}
+              to="/"
+              className="block py-2"
+            >
               Home
             </Link>
-            <Link onClick={() => setIsOpen(false)} to="/dashboard" className="block py-2">
+            <Link
+              onClick={() => setIsOpen(false)}
+              to="/dashboard"
+              className="block py-2"
+            >
               Dashboard
             </Link>
-            <Link onClick={() => setIsOpen(false)} to="/crop" className="block py-2">
+            <Link
+              onClick={() => setIsOpen(false)}
+              to="/crop"
+              className="block py-2"
+            >
               🌾 Crop Recommendation
             </Link>
-            <Link onClick={() => setIsOpen(false)} to="/disease" className="block py-2">
+            <Link
+              onClick={() => setIsOpen(false)}
+              to="/disease"
+              className="block py-2"
+            >
               🦠 Disease Detection
             </Link>
-            <Link onClick={() => setIsOpen(false)} to="/alerts" className="block py-2">
+            <Link
+              onClick={() => setIsOpen(false)}
+              to="/yield"
+              className="block py-2"
+            >
+              📈 Yield Prediction
+            </Link>
+            <Link
+              onClick={() => setIsOpen(false)}
+              to="/alerts"
+              className="block py-2"
+            >
               🌦 Weather Alert
             </Link>
 

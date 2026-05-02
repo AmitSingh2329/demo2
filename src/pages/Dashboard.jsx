@@ -71,10 +71,25 @@ const Dashboard = ({ user, setUser }) => {
     }));
   };
 
+  const handleDeleteYield = async (id) => {
+    if (!window.confirm("Delete this yield record?")) return;
+
+    await axios.delete(
+      `${import.meta.env.VITE_BACKEND_URL}/api/user/yield/${id}`,
+      { withCredentials: true },
+    );
+
+    setData((prev) => ({
+      ...prev,
+      yieldHistory: prev.yieldHistory.filter((i) => i._id.toString() !== id),
+    }));
+  };
+
   if (!data) return null;
 
   const cropHistory = [...(data.cropHistory || [])].reverse();
   const diseaseHistory = [...(data.diseaseHistory || [])].reverse();
+  const yieldHistory = [...(data.yieldHistory || [])].reverse();
 
   const getColor = (val) => {
     if (val >= 75) return "bg-gradient-to-r from-green-400 to-green-600";
@@ -265,6 +280,64 @@ const Dashboard = ({ user, setUser }) => {
           </button>
         </div>
       )}
+
+      {/* 🌾 YIELD HISTORY */}
+      <section className="max-w-7xl mx-auto mt-12">
+        <h2 className="text-2xl font-bold text-green-300 mb-5">
+          Yield History
+        </h2>
+
+        {yieldHistory.length === 0 ? (
+          <div className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl text-center border border-white/20">
+            <p className="text-gray-300 text-lg">No yield predictions yet</p>
+            <button
+              onClick={() => navigate("/yield")}
+              className="mt-4 bg-green-500 hover:bg-green-600 px-6 py-2 rounded-lg text-white font-semibold"
+            >
+              ➕ Predict Yield
+            </button>
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {yieldHistory.map((item) => (
+              <div
+                key={item._id}
+                className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-xl hover:scale-[1.02] transition"
+              >
+                <p className="text-xs text-gray-400 mb-2">
+                  📅 {new Date(item.createdAt).toLocaleString()}
+                </p>
+
+                <h2 className="text-xl font-bold text-green-400">
+                  🌾 Yield: {item.result?.predicted_yield}
+                </h2>
+
+                {/* INPUT SUMMARY */}
+                <div className="mt-3 text-sm text-gray-300 space-y-1">
+                  <p>🌱 Crop: {item.input.crop}</p>
+                  <p>📍 State: {item.input.state}</p>
+                  <p>📅 Year: {item.input.year}</p>
+                  <p>🌧 Rainfall: {item.input.rainfall}</p>
+                </div>
+
+                {/* EXTRA DETAILS */}
+                <div className="mt-3 text-sm text-gray-400 space-y-1">
+                  <p>📏 Area: {item.input.area}</p>
+                  <p>🧪 Fertilizer: {item.input.fertilizer}</p>
+                  <p>☠ Pesticide: {item.input.pesticide}</p>
+                </div>
+
+                <button
+                  onClick={() => handleDeleteYield(item._id)}
+                  className="mt-4 text-red-400 hover:text-red-500 text-sm"
+                >
+                  🗑 Delete
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
     </div>
   );
 };
