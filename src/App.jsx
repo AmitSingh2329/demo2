@@ -8,7 +8,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import CropRecommendation from "./pages/CropRecommendation";
-import Navbar from "./component/navbar";
+import Navbar from "./component/Navbar";
 import ProtectedRoute from "./component/ProtectedRoute";
 import WeatherAlertsPage from "./pages/WeatherAlert";
 import DiseaseDetection from "./pages/DiseaseDetection";
