@@ -9,7 +9,7 @@ import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import CropRecommendation from "./pages/CropRecommendation.jsx";
 import ProtectedRoute from "./component/ProtectedRoute.jsx";
-import WeatherAlertsPage from "./pages/WeatherAlert.jsx";
+import WeatherAlertsPage from "./pages/WeatherAler.jsx";
 import DiseaseDetection from "./pages/DiseaseDetection.jsx";
 import YieldPrediction from "./pages/YieldPrediction.jsx";
 
