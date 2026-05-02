@@ -2,17 +2,16 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
-import Navbar from "./component/Navbar";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
-import CropRecommendation from "./pages/CropRecommendation";
-
-import ProtectedRoute from "./component/ProtectedRoute";
-import WeatherAlertsPage from "./pages/WeatherAlert";
-import DiseaseDetection from "./pages/DiseaseDetection";
-import YieldPrediction from "./pages/YieldPrediction";
+import Navbar from "./component/Navbar.jsx";
+import Home from "./pages/Home.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import CropRecommendation from "./pages/CropRecommendation.jsx";
+import ProtectedRoute from "./component/ProtectedRoute.jsx";
+import WeatherAlertsPage from "./pages/weatherAlert.jsx";
+import DiseaseDetection from "./pages/DiseaseDetection.jsx";
+import YieldPrediction from "./pages/YieldPrediction.jsx";
 
 /* 🔥 Page Wrapper (FINAL) */
 const PageWrapper = ({ children, noScroll = false }) => {
