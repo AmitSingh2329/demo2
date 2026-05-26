@@ -32,7 +32,7 @@ const WeatherAlerts = () => {
         {
           params: { format: "json", lat, lon },
           withCredentials: false, // 🔥 MUST
-          timeout: 5000,
+          timeout: 10000,
         },
       );
 
